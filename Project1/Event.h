@@ -37,6 +37,28 @@ public:
 		delete[] location;
 	}
 
+    Event(const Event& other) : eventType(other.eventType), isOutside(other.isOutside),
+        date(other.date), hour(other.hour) {
+    
+        if (other.eventName != nullptr) {
+            eventName = new char[strlen(other.eventName) + 1];
+            strcpy(eventName, other.eventName);
+        }
+        else {
+            eventName = nullptr;
+        }
+
+     
+        if (other.location != nullptr) {
+            location = new char[strlen(other.location) + 1];
+            strcpy(location, other.location);
+        }
+        else {
+            location = nullptr;
+        }
+    }
+
+
     //getters
     const char* getEventName() const {
         return eventName;
@@ -93,15 +115,36 @@ public:
     }
 
 
+    char operator[](int index) const {
+        if (eventName != nullptr && index >= 0 && index < strlen(eventName)) {
+            return eventName[index];
+        }
+        return '\0'; 
+    }
 
-	bool operator!();
+    explicit operator bool()const {
+        return eventName != nullptr;
+    }
+    bool operator !() const{
+        return eventName == nullptr;
+    }
+
+
 	friend ostream& operator<<(ostream&, Event);
 	friend istream& operator>>(istream&, Event&);
 	friend ofstream& operator<<(ofstream&, Event);
 	friend ifstream& operator>>(ifstream&, Event&);
 };
 
- ostream& operator<<(ostream&, Event);
+ostream& operator<<(ostream& os, const Event& event) {
+    os << "Event Name: " << event.getEventName() << "\n"
+        << "Event Type: " << event.getEventType() << "\n"
+        << "Is Outside: " << event.getIsOutside() << "\n"
+        << "Location: " << event.getLocation() << "\n"
+        << "Date: " << event.getDate() << "\n"
+        << "Hour: " << event.getHour() << "\n";
+    return os;
+}
  istream& operator>>(istream&, Event&);
  ofstream& operator<<(ofstream&, Event);
  ifstream& operator>>(ifstream&, Event&);

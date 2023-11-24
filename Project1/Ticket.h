@@ -14,6 +14,7 @@ private:
 	static float BASE_PRICE;
 
 	Ticket() : Ticket_ID(0), category(" "), seat(0), row(0) {
+
 	}
 
 	

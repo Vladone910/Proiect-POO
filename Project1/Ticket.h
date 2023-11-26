@@ -27,6 +27,13 @@ private:
 
 	~Ticket() {}
 
+	Ticket(const Ticket& other) {
+		this->Ticket_ID = other.Ticket_ID;
+		this->category = other.category;
+		this->seat = other.seat;
+		this->row = other.row;
+	}
+
 	int getTicketID() {
 		return this->Ticket_ID;
 	}
@@ -65,6 +72,16 @@ private:
 		return BASE_PRICE;
 	}
 
+	Ticket& operator++() {
+		++Ticket_ID;
+		return *this;
+	}
+
+	Ticket operator++(int) {
+		Ticket temp = *this; 
+		++(*this); 
+		return temp; 
+	}
 
 	friend ostream& operator<<(ostream& os, Ticket& ticket);
 	friend istream& operator>>(istream& is, Ticket& ticket);

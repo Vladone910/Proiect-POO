@@ -11,7 +11,7 @@ enum EventType { concert, movie, football_match, play, other };
 
 class Event
 {
-private:
+protected:
 	char* eventName;
 	EventType eventType;
 	bool isOutside;
@@ -27,10 +27,10 @@ public:
 	Event(const char* name, EventType eventType, bool outside, const char* loc, const string& d, const string& h)
 		: eventType(eventType), isOutside(outside), date(d), hour(h) {
 		eventName = new char[strlen(name) + 1];
-		strcpy(eventName, name);
+		strcpy_s(eventName, strlen(name) + 1, name);
 
 		location = new char[strlen(loc) + 1];
-		strcpy(location, loc);
+		strcpy_s(location, strlen(loc) + 1, loc);
 	}
 	~Event() {
 		delete[] eventName;
@@ -42,7 +42,7 @@ public:
     
         if (other.eventName != nullptr) {
             eventName = new char[strlen(other.eventName) + 1];
-            strcpy(eventName, other.eventName);
+            strcpy_s(eventName, strlen(other.eventName) + 1, other.eventName);
         }
         else {
             eventName = nullptr;
@@ -51,7 +51,7 @@ public:
      
         if (other.location != nullptr) {
             location = new char[strlen(other.location) + 1];
-            strcpy(location, other.location);
+            strcpy_s(location, strlen(other.location) + 1, other.location);
         }
         else {
             location = nullptr;
@@ -89,7 +89,7 @@ public:
     void setEventName(const char* name) {
         delete[] eventName;
         eventName = new char[strlen(name) + 1];
-        strcpy(eventName, name);
+        strcpy_s(eventName, strlen(name) + 1, name);
     }
 
     void setEventType(EventType type) {
@@ -103,7 +103,7 @@ public:
     void setLocation(const char* loc) {
         delete[] location;
         location = new char[strlen(loc) + 1];
-        strcpy(location, loc);
+        strcpy_s(location, strlen(loc) + 1, loc);
     }
 
     void setDate(const string& d) {
@@ -130,7 +130,7 @@ public:
     }
 
 
-	friend ostream& operator<<(ostream&, Event);
+	friend ostream& operator<<(ostream& os, const Event& event);
 	friend istream& operator>>(istream&, Event&);
 	friend ofstream& operator<<(ofstream&, Event);
 	friend ifstream& operator>>(ifstream&, Event&);
@@ -138,8 +138,8 @@ public:
 
 ostream& operator<<(ostream& os, const Event& event) {
     os << "Event Name: " << event.getEventName() << "\n"
-        << "Event Type: " << event.getEventType() << "\n"
-        << "Is Outside: " << event.getIsOutside() << "\n"
+        //<< "Event Type: " << event.getEventType() << "\n"
+       // << "Is Outside: " << event.getIsOutside() << "\n"
         << "Location: " << event.getLocation() << "\n"
         << "Date: " << event.getDate() << "\n"
         << "Hour: " << event.getHour() << "\n";

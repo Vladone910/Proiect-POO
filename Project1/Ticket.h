@@ -6,7 +6,7 @@
 using namespace std;
 
 class Ticket {
-private:
+protected:
 	int Ticket_ID;
 	string category;
 	int seat;

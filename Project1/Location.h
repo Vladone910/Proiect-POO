@@ -6,7 +6,7 @@ using namespace std;
 
 class Location
 {
-private:
+protected:
     int* seatsPerRow;
     const unsigned int Max_No_Rows;
     const unsigned int Max_No_Seats;

@@ -15,6 +15,11 @@ int main() {
     Event e2("Piesa de teatru", concert, false, "TNB", "2024-02-15", "17:30");
 
    
+    Ticket t1(101, "sports", 25, 7);
+    Ticket t2(102, "concert", 30, 5);
+
+
+    Location l1(40, 25);
 
 	cout << endl << "       TICKETING APPLICATION       ";
 	cout << endl << "Choose from the following options: ";
@@ -37,12 +42,28 @@ int main() {
 
         case 2:
             cout << endl << "Buying a ticket:";
+            cout << endl << "Row: ";
+            int row;
+            cin >> row;
+            cout << endl << "Seat: ";
+            int seat;
+            cin >> seat;
+
          
+             t1.serialize();
+
+            cout << endl << "Ticket created! ";
             break;
 
         case 3:
             cout << endl << "Validating a ticket:";
+           
+            cout << endl << "Write the id of the ticket: ";
+            int id;
+            cin >> id;
             
+            t1.deserialize();
+
             break;
 
         case 4:

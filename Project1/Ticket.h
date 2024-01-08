@@ -2,11 +2,12 @@
 #include <iostream>
 #include <string>
 #include <string.h>
+#include <fstream>
 
 using namespace std;
 
 class Ticket {
-protected:
+public:
 	int Ticket_ID;
 	string category;
 	int seat;
@@ -85,11 +86,33 @@ protected:
 
 	friend ostream& operator<<(ostream& os, Ticket& ticket);
 	friend istream& operator>>(istream& is, Ticket& ticket);
+
+
+
+	void serialize() {
+		ofstream fout("Tickets.bin", ios::binary);
+		fout.write((char*)&Ticket_ID, sizeof(Ticket_ID));
+		fout.write((char*)&seat, sizeof(seat));
+		fout.write((char*)&row, sizeof(row));
+		fout.close();
+	}
+
+	void deserialize() {
+		ifstream fin("Tickets.bin", ios::binary);
+		if (fin.is_open())
+		{
+			fin.read((char*)&Ticket_ID, sizeof(Ticket_ID));
+			fin.read((char*)&seat, sizeof(seat));
+			fin.read((char*)&row, sizeof(row));
+			fin.close();
+		}
+	}
+
 };
 
 ostream& operator<<(ostream& os, Ticket& ticket) {
 	os << "Ticket ID: " << ticket.getTicketID() << "\n";
-	os << "Category: " << ticket.getCategory() << "\n";
+	//os << "Category: " << ticket.getCategory() << "\n";
 	os << "Seat: " << ticket.getSeat() << "\n";
 	os << "Row: " << ticket.getRow() << "\n";
 	return os;

@@ -124,9 +124,31 @@ public:
     }
 
     friend ostream& operator<<(ostream& os, const Location& loc);
+
+
+    virtual void showLocation() const = 0;
+
+
 };
 
+class ConcreteLocation : public Location{
+protected:
 
+    string location;
+
+public:
+
+    ConcreteLocation() {
+        location = location;
+    }
+    ConcreteLocation(string location) {
+        this->location = location;
+    }
+
+    void showLocation() const override {
+        cout << endl << "The location is in Eastern Europe";
+    }
+};
 
   ostream& operator<<(ostream& os, const Location& loc) {
     os << "Number of Rows: " << loc.Max_No_Rows << "\n";

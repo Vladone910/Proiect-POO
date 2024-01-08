@@ -18,8 +18,13 @@ int main() {
     Ticket t1(101, "sports", 25, 7);
     Ticket t2(102, "concert", 30, 5);
 
+    TicketGenerator t3(104, "sports", 37, 8, true);
 
-    Location l1(40, 25);
+
+  
+    ConcreteLocation c1("Romania");
+
+     c1.showLocation();
 
 	cout << endl << "       TICKETING APPLICATION       ";
 	cout << endl << "Choose from the following options: ";
@@ -49,8 +54,9 @@ int main() {
             int seat;
             cin >> seat;
 
-         
-             t1.serialize();
+             t3.Generate();
+             t3.serialize();
+           
 
             cout << endl << "Ticket created! ";
             break;
@@ -75,6 +81,6 @@ int main() {
             break;
         }
 
-
+       
 
 }

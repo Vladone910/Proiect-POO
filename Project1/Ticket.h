@@ -108,6 +108,11 @@ public:
 		}
 	}
 
+
+	virtual void Generate(){
+	
+	}
+
 };
 
 ostream& operator<<(ostream& os, Ticket& ticket) {
@@ -140,3 +145,30 @@ ostream& operator<<(ostream& os, Ticket& ticket) {
 
 	return is;
 }
+
+ class TicketGenerator : public Ticket {
+ protected:
+	 bool hasDiscount;
+ public:
+
+	 TicketGenerator() {
+		 hasDiscount = hasDiscount;
+	 }
+
+	 TicketGenerator(int Ticket_id, string catergory, int seat, int row, bool hasDiscount) : Ticket(Ticket_id, catergory, seat, row) {
+		 this->hasDiscount = hasDiscount;
+	 }
+	 bool getHasDiscount() {
+		 return this->hasDiscount;
+	 }
+	 void setHasDiscount(bool hasDiscount) {
+		 this->hasDiscount = hasDiscount;
+	 }
+
+
+	void Generate() {
+		 cout << "Generating a ticket";
+	 }
+
+
+ };
